@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve-local": "vue-cli-service serve --mode .env.local",
+    "serve-produce": "vue-cli-service serve --mode .env.prod",
+    "build-local": "vue-cli-service build --mode .env.local",
+    "build-produce": "vue-cli-service build --mode .env.prod",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -19,20 +21,6 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
   },
   "browserslist": [
     "> 1%",
