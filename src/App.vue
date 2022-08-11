@@ -1,13 +1,18 @@
 <template>
   <div>
-    <h1>hello world</h1>
+    <MilkDownEditor/>
   </div>
 </template>
 
 <script>
 
+import MilkDownEditor from '@/components/MilkDownEditor'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    MilkDownEditor
+  }
 }
 </script>
 
