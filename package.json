@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "@milkdown/core": "^6.3.2",
+    "@milkdown/plugin-menu": "^6.3.2",
+    "@milkdown/plugin-tooltip": "^6.3.2",
     "@milkdown/preset-commonmark": "^6.3.2",
+    "@milkdown/preset-gfm": "^6.3.2",
     "@milkdown/prose": "^6.3.2",
     "@milkdown/theme-nord": "^6.3.2",
     "@milkdown/vue": "^6.3.2",
