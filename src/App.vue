@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MilkDownEditor :markdown-text="text" :readonly="readonly"/>
+    <MilkDownEditor :markdown-text="text" :readonly="readonly" />
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
   components: {
     MilkDownEditor
   },
-  data() {
+  data () {
     return {
       text: '123',
       readonly: false
