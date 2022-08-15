@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {Editor, rootCtx, defaultValueCtx, themeManagerCtx} from '@milkdown/core'
+import {Editor, rootCtx, defaultValueCtx, themeManagerCtx, editorViewOptionsCtx} from '@milkdown/core'
 import {nord} from '@milkdown/theme-nord'
 import {VueEditor, useEditor} from '@milkdown/vue'
 import {gfm} from '@milkdown/preset-gfm'
@@ -21,24 +21,22 @@ export default {
   components: {
     VueEditor
   },
-  setup() {
+  props: {
+    markdownText: {
+      type: String
+    },
+    readonly: {
+      type: Boolean
+    }
+  },
+  setup(props) {
+    const editable = () => !props.readonly
     const editor = useEditor((root) => {
       return Editor.make()
           .config((ctx) => {
             ctx.set(rootCtx, root)
-            ctx.set(defaultValueCtx, '# h1\n' +
-                '\n' +
-                '## h2\n' +
-                '\n' +
-                '## h3\n' +
-                '\n' +
-                '#### h4\n' +
-                '\n' +
-                '##### h5\n' +
-                '\n' +
-                '###### h6\n' +
-                '\n' +
-                '普通文本内容\n')
+            ctx.set(defaultValueCtx, props.markdownText) // 初始化内容
+            ctx.set(editorViewOptionsCtx, { editable }) // 是否可编辑
           })
           .use(gfm)
           .use(history)

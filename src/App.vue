@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MilkDownEditor/>
+    <MilkDownEditor :markdown-text="text" :readonly="true"/>
   </div>
 </template>
 
@@ -12,6 +12,11 @@ export default {
   name: 'App',
   components: {
     MilkDownEditor
+  },
+  data() {
+    return {
+      text: '123'
+    }
   }
 }
 </script>
