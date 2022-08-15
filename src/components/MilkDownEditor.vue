@@ -3,10 +3,12 @@
 </template>
 
 <script>
-import {Editor, rootCtx, defaultValueCtx, themeManagerCtx, editorViewOptionsCtx} from '@milkdown/core'
+import {Editor, rootCtx, defaultValueCtx, editorViewCtx, serializerCtx, themeManagerCtx, editorViewOptionsCtx} from '@milkdown/core'
 import {nord} from '@milkdown/theme-nord'
 import {VueEditor, useEditor} from '@milkdown/vue'
 import {gfm} from '@milkdown/preset-gfm'
+
+import { listener, listenerCtx } from '@milkdown/plugin-listener' // 内容监听
 
 import {history} from '@milkdown/plugin-history' // 撤销和重做支持
 import {menu, menuPlugin, defaultConfig} from '@milkdown/plugin-menu' // 菜单按钮
@@ -27,6 +29,12 @@ export default {
     },
     readonly: {
       type: Boolean
+    },
+    onContextChange: {
+      type: Function,
+      default: (ctx, markdown, prevMarkdown) => {
+        console.log(ctx, markdown, prevMarkdown)
+      }
     }
   },
   setup(props) {
@@ -37,8 +45,12 @@ export default {
             ctx.set(rootCtx, root)
             ctx.set(defaultValueCtx, props.markdownText) // 初始化内容
             ctx.set(editorViewOptionsCtx, { editable }) // 是否可编辑
+            ctx.get(listenerCtx).markdownUpdated((ctx, markdown, prevMarkdown) => {
+              props.onContextChange(ctx, markdown, prevMarkdown)
+            })
           })
           .use(gfm)
+          .use(listener)
           .use(history)
           .use(clipboard)
           .use(indent)
@@ -176,6 +188,20 @@ export default {
     })
     return {
       editor
+    }
+  },
+  methods: {
+    async getMarkDownText() {
+      const editor = await Editor.make().use(gfm).create()
+
+      const getMarkdown = () => {
+        return editor.action((ctx) => {
+          const editorView = ctx.get(editorViewCtx)
+          const serializer = ctx.get(serializerCtx)
+          return serializer(editorView.state.doc)
+        })
+      }
+      getMarkdown()
     }
   }
 }

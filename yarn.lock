@@ -1208,6 +1208,14 @@
     "@milkdown/utils" "6.3.2"
     tslib "^2.4.0"
 
+"@milkdown/plugin-listener@^6.3.2":
+  version "6.3.2"
+  resolved "https://registry.npmmirror.com/@milkdown/plugin-listener/-/plugin-listener-6.3.2.tgz#530d718c95f8119da44b14768667ad7cd3248c43"
+  integrity sha512-ykhg0s5qfjx7Ys+4qZKmEwgfK1Khw1+JQ4vvEFRZJZS3hcWwf+KNrouBY5m+tDBh1Xsy8cNXnl7Hya9CHYKMEw==
+  dependencies:
+    "@milkdown/utils" "6.3.2"
+    tslib "^2.4.0"
+
 "@milkdown/plugin-menu@^6.3.2":
   version "6.3.2"
   resolved "https://registry.npmmirror.com/@milkdown/plugin-menu/-/plugin-menu-6.3.2.tgz#c040a673d28e1bdda13cfada6880ad83b558f3a5"
