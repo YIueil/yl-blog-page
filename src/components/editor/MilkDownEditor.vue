@@ -30,23 +30,24 @@ export default {
     readonly: {
       type: Boolean
     },
-    onContextChange: {
+    onMarkdownUpdated: {
       type: Function,
       default: (ctx, markdown, prevMarkdown) => {
         console.log(ctx, markdown, prevMarkdown)
       }
     }
   },
-  setup(props) {
+  setup(props, context) {
+    console.log(props, context)
     const editable = () => !props.readonly
     const editor = useEditor((root) => {
       return Editor.make()
           .config((ctx) => {
             ctx.set(rootCtx, root)
             ctx.set(defaultValueCtx, props.markdownText) // 初始化内容
-            ctx.set(editorViewOptionsCtx, { editable }) // 是否可编辑
+            ctx.set(editorViewOptionsCtx, {editable}) // 是否可编辑
             ctx.get(listenerCtx).markdownUpdated((ctx, markdown, prevMarkdown) => {
-              props.onContextChange(ctx, markdown, prevMarkdown)
+              props.onMarkdownUpdated(ctx, markdown, prevMarkdown)
             })
           })
           .use(gfm)

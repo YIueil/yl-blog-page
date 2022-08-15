@@ -6,7 +6,7 @@
 
 <script>
 
-import MilkDownEditor from '@/components/MilkDownEditor'
+import MilkDownEditor from '@/components/editor/MilkDownEditor'
 
 export default {
   name: 'App',
