@@ -4,20 +4,28 @@
 </template>
 
 <script>
-import {Editor, rootCtx, defaultValueCtx, editorViewCtx, serializerCtx, themeManagerCtx, editorViewOptionsCtx} from '@milkdown/core'
-import {nord} from '@milkdown/theme-nord'
-import {VueEditor, useEditor} from '@milkdown/vue'
-import {gfm} from '@milkdown/preset-gfm'
+import {
+  Editor,
+  rootCtx,
+  defaultValueCtx,
+  editorViewCtx,
+  serializerCtx,
+  themeManagerCtx,
+  editorViewOptionsCtx
+} from '@milkdown/core'
+import { nord } from '@milkdown/theme-nord'
+import { VueEditor, useEditor } from '@milkdown/vue'
+import { gfm } from '@milkdown/preset-gfm'
 
 import { listener, listenerCtx } from '@milkdown/plugin-listener' // 内容监听
 
-import {history} from '@milkdown/plugin-history' // 撤销和重做支持
-import {menu, menuPlugin, defaultConfig} from '@milkdown/plugin-menu' // 菜单按钮
-import {clipboard} from '@milkdown/plugin-clipboard' // 剪切板增强
-import {indent} from '@milkdown/plugin-indent' // 缩进支持
-import {slash, slashPlugin, createDropdownItem, defaultActions} from '@milkdown/plugin-slash' // 斜杠命令支持
-import {block} from '@milkdown/plugin-block' // 块选择支持
-import {prism} from '@milkdown/plugin-prism' // 代码高亮支持 依赖 prism-themes
+import { history } from '@milkdown/plugin-history' // 撤销和重做支持
+import { menu, menuPlugin, defaultConfig } from '@milkdown/plugin-menu' // 菜单按钮
+import { clipboard } from '@milkdown/plugin-clipboard' // 剪切板增强
+import { indent } from '@milkdown/plugin-indent' // 缩进支持
+import { slash, slashPlugin, createDropdownItem, defaultActions } from '@milkdown/plugin-slash' // 斜杠命令支持
+import { block } from '@milkdown/plugin-block' // 块选择支持
+import { prism } from '@milkdown/plugin-prism' // 代码高亮支持 依赖 prism-themes
 
 export default {
   name: 'MilkDownEditor',
@@ -38,7 +46,7 @@ export default {
       }
     }
   },
-  setup(props, context) {
+  setup (props, context) {
     console.log(props, context)
     const editable = () => !props.readonly
     const editor = useEditor((root) => {
@@ -46,7 +54,7 @@ export default {
           .config((ctx) => {
             ctx.set(rootCtx, root)
             ctx.set(defaultValueCtx, props.markdownText) // 初始化内容
-            ctx.set(editorViewOptionsCtx, {editable}) // 是否可编辑
+            ctx.set(editorViewOptionsCtx, { editable }) // 是否可编辑
             ctx.get(listenerCtx).markdownUpdated((ctx, markdown, prevMarkdown) => {
               props.onMarkdownUpdated(ctx, markdown, prevMarkdown)
             })
@@ -60,11 +68,11 @@ export default {
           .use(block)
           .use(slash.configure(slashPlugin, {
             config: (ctx) => {
-              return ({content, isTopLevel}) => {
+              return ({ content, isTopLevel }) => {
                 if (!isTopLevel) return null
 
                 const mapActions = (action) => {
-                  const {id = ''} = action
+                  const { id = '' } = action
                   switch (id) {
                     case 'h1':
                       action.dom = createDropdownItem(
@@ -173,10 +181,10 @@ export default {
                       ...x,
                       text: '标题',
                       options: [
-                        {id: '1', text: '一级标题'},
-                        {id: '2', text: '二级标题'},
-                        {id: '3', text: '三级标题'},
-                        {id: '0', text: '正文'}
+                        { id: '1', text: '一级标题' },
+                        { id: '2', text: '二级标题' },
+                        { id: '3', text: '三级标题' },
+                        { id: '0', text: '正文' }
                       ]
                     }
                   }
@@ -193,7 +201,7 @@ export default {
     }
   },
   methods: {
-    async getMarkDownText() {
+    async getMarkDownText () {
       const editor = await Editor.make().use(gfm).create()
 
       const getMarkdown = () => {
