@@ -20,6 +20,7 @@ import { gfm } from '@milkdown/preset-gfm'
 import { listener, listenerCtx } from '@milkdown/plugin-listener' // 内容监听
 
 import { history } from '@milkdown/plugin-history' // 撤销和重做支持
+import { menu, menuPlugin, defaultConfig } from '@milkdown/plugin-menu' // 菜单按钮
 import { clipboard } from '@milkdown/plugin-clipboard' // 剪切板增强
 import { indent } from '@milkdown/plugin-indent' // 缩进支持
 import { slash, slashPlugin, createDropdownItem, defaultActions } from '@milkdown/plugin-slash' // 斜杠命令支持
@@ -172,6 +173,29 @@ export default {
               }
             }
           }))
+          .use(menu.configure(menuPlugin, {
+            config: defaultConfig.map((xs) => {
+              return xs.map((x) => {
+                if (x.type !== 'select') return x
+                switch (x.text) {
+                  case 'Heading': {
+                    return {
+                      ...x,
+                      text: '标题',
+                      options: [
+                        { id: '1', text: '一级标题' },
+                        { id: '2', text: '二级标题' },
+                        { id: '3', text: '三级标题' },
+                        { id: '0', text: '正文' }
+                      ]
+                    }
+                  }
+                  default:
+                    return x
+                }
+              })
+            })
+          }))
           .use(prism)
     })
     return {
@@ -218,13 +242,5 @@ export default {
 
 /deep/ .milkdown .editor h6 {
   font-size: 16px;
-}
-
-/deep/ .milkdown {
-  box-shadow: none;
-}
-
-/deep/ .milkdown .editor {
-  padding: unset;
 }
 </style>

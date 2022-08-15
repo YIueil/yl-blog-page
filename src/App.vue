@@ -1,23 +1,17 @@
 <template>
   <div>
-    <MilkDownEditor :markdown-text="text" :readonly="readonly" />
+    <BlogHome />
   </div>
 </template>
 
 <script>
 
-import MilkDownEditor from '@/components/Editor/MilkDownEditor'
+import BlogHome from '@/views/BlogHome'
 
 export default {
   name: 'App',
   components: {
-    MilkDownEditor
-  },
-  data () {
-    return {
-      text: '123',
-      readonly: false
-    }
+    BlogHome
   }
 }
 </script>
