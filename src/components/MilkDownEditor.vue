@@ -1,5 +1,5 @@
 <template>
-  <VueEditor :editor="editor"/>
+  <VueEditor :editor="editor" />
 </template>
 
 <script>
@@ -9,7 +9,7 @@ import {VueEditor, useEditor} from '@milkdown/vue'
 import {gfm} from '@milkdown/preset-gfm'
 
 import {history} from '@milkdown/plugin-history' // 撤销和重做支持
-import {menu,menuPlugin,defaultConfig} from '@milkdown/plugin-menu' // 菜单按钮
+import {menu, menuPlugin, defaultConfig} from '@milkdown/plugin-menu' // 菜单按钮
 import {clipboard} from '@milkdown/plugin-clipboard' // 剪切板增强
 import {indent} from '@milkdown/plugin-indent' // 缩进支持
 import {slash, slashPlugin, createDropdownItem, defaultActions} from '@milkdown/plugin-slash' // 斜杠命令支持
@@ -22,161 +22,160 @@ export default {
     VueEditor
   },
   setup() {
-    const editor = useEditor((root) =>
-        Editor.make()
-            .config((ctx) => {
-              ctx.set(rootCtx, root)
-              ctx.set(defaultValueCtx, '# h1\n' +
-                  '\n' +
-                  '## h2\n' +
-                  '\n' +
-                  '## h3\n' +
-                  '\n' +
-                  '#### h4\n' +
-                  '\n' +
-                  '##### h5\n' +
-                  '\n' +
-                  '###### h6\n' +
-                  '\n' +
-                  '普通文本内容\n')
-            })
-            .use(gfm)
-            .use(history)
-            .use(clipboard)
-            .use(indent)
-            .use(nord)
-            .use(block)
-            .use(slash.configure(slashPlugin, {
-              config: (ctx) => {
-                return ({content, isTopLevel}) => {
-                  if (!isTopLevel) return null
+    const editor = useEditor((root) => {
+      return Editor.make()
+          .config((ctx) => {
+            ctx.set(rootCtx, root)
+            ctx.set(defaultValueCtx, '# h1\n' +
+                '\n' +
+                '## h2\n' +
+                '\n' +
+                '## h3\n' +
+                '\n' +
+                '#### h4\n' +
+                '\n' +
+                '##### h5\n' +
+                '\n' +
+                '###### h6\n' +
+                '\n' +
+                '普通文本内容\n')
+          })
+          .use(gfm)
+          .use(history)
+          .use(clipboard)
+          .use(indent)
+          .use(nord)
+          .use(block)
+          .use(slash.configure(slashPlugin, {
+            config: (ctx) => {
+              return ({content, isTopLevel}) => {
+                if (!isTopLevel) return null
 
-                  const mapActions = (action) => {
-                    const {id = ''} = action
-                    switch (id) {
-                      case 'h1':
-                        action.dom = createDropdownItem(
-                            ctx.get(themeManagerCtx),
-                            '一级标题',
-                            'h1'
-                        )
-                        return action
-                      case 'h2':
-                        action.dom = createDropdownItem(
-                            ctx.get(themeManagerCtx),
-                            '二级标题',
-                            'h2'
-                        )
-                        return action
-                      case 'h3':
-                        action.dom = createDropdownItem(
-                            ctx.get(themeManagerCtx),
-                            '三级标题',
-                            'h3'
-                        )
-                        return action
-                      case 'bulletList':
-                        action.dom = createDropdownItem(
-                            ctx.get(themeManagerCtx),
-                            '无序列表',
-                            'bulletList'
-                        )
-                        return action
-                      case 'orderedList':
-                        action.dom = createDropdownItem(
-                            ctx.get(themeManagerCtx),
-                            '有序列表',
-                            'orderedList'
-                        )
-                        return action
-                      case 'taskList':
-                        action.dom = createDropdownItem(
-                            ctx.get(themeManagerCtx),
-                            '待办列表',
-                            'taskList'
-                        )
-                        return action
-                      case 'table':
-                        action.dom = createDropdownItem(
-                            ctx.get(themeManagerCtx),
-                            '表格',
-                            'table'
-                        )
-                        return action
-                      case 'image':
-                        action.dom = createDropdownItem(
-                            ctx.get(themeManagerCtx),
-                            '图片',
-                            'image'
-                        )
-                        return action
-                      case 'blockquote':
-                        action.dom = createDropdownItem(
-                            ctx.get(themeManagerCtx),
-                            '引用',
-                            'quote'
-                        )
-                        return action
-                      case 'code':
-                        action.dom = createDropdownItem(
-                            ctx.get(themeManagerCtx),
-                            '代码块',
-                            'code'
-                        )
-                        return action
-                      case 'divider':
-                        action.dom = createDropdownItem(
-                            ctx.get(themeManagerCtx),
-                            '分割线',
-                            'divider'
-                        )
-                        return action
-                      default:
-                        return action
-                    }
-                  }
-
-                  if (content.startsWith('/')) {
-                    return content === '/'
-                        ? {
-                          placeholder: '<(￣︶￣)↗[GO!]',
-                          actions: defaultActions(ctx).map(mapActions)
-                        }
-                        : {
-                          actions: defaultActions(ctx, content).map(mapActions)
-                        }
-                  }
-
-                  return null
-                }
-              }
-            }))
-            .use(menu.configure(menuPlugin, {
-              config: defaultConfig.map((xs) => {
-                return xs.map((x) => {
-                  console.log(x)
-                  if (x.type !== 'select') return x
-                  switch (x.text) {
-                    case 'Heading': {
-                      return {
-                        ...x,
-                        text: '标题',
-                        options: [
-                          { id: '1', text: '一级标题' },
-                          { id: '2', text: '二级标题' },
-                          { id: '3', text: '三级标题' },
-                          { id: '0', text: '正文' }
-                        ]
-                      }
-                    }
+                const mapActions = (action) => {
+                  const {id = ''} = action
+                  switch (id) {
+                    case 'h1':
+                      action.dom = createDropdownItem(
+                          ctx.get(themeManagerCtx),
+                          '一级标题',
+                          'h1'
+                      )
+                      return action
+                    case 'h2':
+                      action.dom = createDropdownItem(
+                          ctx.get(themeManagerCtx),
+                          '二级标题',
+                          'h2'
+                      )
+                      return action
+                    case 'h3':
+                      action.dom = createDropdownItem(
+                          ctx.get(themeManagerCtx),
+                          '三级标题',
+                          'h3'
+                      )
+                      return action
+                    case 'bulletList':
+                      action.dom = createDropdownItem(
+                          ctx.get(themeManagerCtx),
+                          '无序列表',
+                          'bulletList'
+                      )
+                      return action
+                    case 'orderedList':
+                      action.dom = createDropdownItem(
+                          ctx.get(themeManagerCtx),
+                          '有序列表',
+                          'orderedList'
+                      )
+                      return action
+                    case 'taskList':
+                      action.dom = createDropdownItem(
+                          ctx.get(themeManagerCtx),
+                          '待办列表',
+                          'taskList'
+                      )
+                      return action
+                    case 'table':
+                      action.dom = createDropdownItem(
+                          ctx.get(themeManagerCtx),
+                          '表格',
+                          'table'
+                      )
+                      return action
+                    case 'image':
+                      action.dom = createDropdownItem(
+                          ctx.get(themeManagerCtx),
+                          '图片',
+                          'image'
+                      )
+                      return action
+                    case 'blockquote':
+                      action.dom = createDropdownItem(
+                          ctx.get(themeManagerCtx),
+                          '引用',
+                          'quote'
+                      )
+                      return action
+                    case 'code':
+                      action.dom = createDropdownItem(
+                          ctx.get(themeManagerCtx),
+                          '代码块',
+                          'code'
+                      )
+                      return action
+                    case 'divider':
+                      action.dom = createDropdownItem(
+                          ctx.get(themeManagerCtx),
+                          '分割线',
+                          'divider'
+                      )
+                      return action
                     default:
-                      return x
+                      return action
                   }
-                })
+                }
+
+                if (content.startsWith('/')) {
+                  return content === '/'
+                      ? {
+                        placeholder: '<(￣︶￣)↗[GO!]',
+                        actions: defaultActions(ctx).map(mapActions)
+                      }
+                      : {
+                        actions: defaultActions(ctx, content).map(mapActions)
+                      }
+                }
+
+                return null
+              }
+            }
+          }))
+          .use(menu.configure(menuPlugin, {
+            config: defaultConfig.map((xs) => {
+              return xs.map((x) => {
+                if (x.type !== 'select') return x
+                switch (x.text) {
+                  case 'Heading': {
+                    return {
+                      ...x,
+                      text: '标题',
+                      options: [
+                        {id: '1', text: '一级标题'},
+                        {id: '2', text: '二级标题'},
+                        {id: '3', text: '三级标题'},
+                        {id: '0', text: '正文'}
+                      ]
+                    }
+                  }
+                  default:
+                    return x
+                }
               })
-            }))
-            .use(prism)
-    )
+            })
+          }))
+          .use(prism)
+    })
     return {
       editor
     }
