@@ -1,3 +1,4 @@
+<!-- vue3 MilkDown 编辑器 -->
 <template>
   <VueEditor :editor="editor" />
 </template>

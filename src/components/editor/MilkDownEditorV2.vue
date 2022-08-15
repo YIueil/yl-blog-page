@@ -1,3 +1,4 @@
+<!-- 原生 MilkDown 编辑器 -->
 <template>
   <div ref="editor"></div>
 </template>
