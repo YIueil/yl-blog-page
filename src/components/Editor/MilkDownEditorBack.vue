@@ -220,27 +220,27 @@ export default {
 </script>
 
 <style scoped>
-/deep/ .milkdown .editor h1 {
+::v-deep(.milkdown .editor h1) {
   font-size: 24px;
 }
 
-/deep/ .milkdown .editor h2 {
+::v-deep(.milkdown .editor h2) {
   font-size: 20px;
 }
 
-/deep/ .milkdown .editor h3 {
+::v-deep(.milkdown .editor h3) {
   font-size: 18px;
 }
 
-/deep/ .milkdown .editor h4 {
+::v-deep(.milkdown .editor h4) {
   font-size: 16px;
 }
 
-/deep/ .milkdown .editor h5 {
+::v-deep(.milkdown .editor h5) {
   font-size: 16px;
 }
 
-/deep/ .milkdown .editor h6 {
+::v-deep(.milkdown .editor h6) {
   font-size: 16px;
 }
 </style>
