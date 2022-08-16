@@ -60,4 +60,8 @@ export default {
   cursor: pointer;
   background: #efefef;
 }
+
+.clickable:active {
+  background: #dddddc;
+}
 </style>

@@ -41,23 +41,23 @@ export default {
 </script>
 
 <style scoped>
-/deep/ .ant-layout {
+::v-deep .ant-layout {
   background: #ffffff;
 }
 
-/deep/ .ant-layout-sider {
+::v-deep .ant-layout-sider {
   background: #fbfbfa;
 }
 
-/deep/ .ant-layout-header {
+::v-deep .ant-layout-header {
   background: #ffffff;
 }
 
-/deep/ .ant-tree {
+::v-deep .ant-tree {
   background: #fbfbfa;
 }
 
-/deep/ .ant-breadcrumb {
+::v-deep .ant-breadcrumb {
   line-height: unset;
 }
 </style>
