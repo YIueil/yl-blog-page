@@ -8,6 +8,10 @@
       <span class="menuIcon material-icons">upload</span>
       <span class="menuText">导入</span>
     </div>
+    <div class="menuItem">
+      <span class="menuIcon material-icons">delete</span>
+      <span class="menuText">删除</span>
+    </div>
   </div>
 </template>
 
@@ -20,12 +24,14 @@ export default {
 <style scoped>
 .siderMenuList {
   user-select: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .menuItem {
-  position: relative;
+  display: flex;
   height: 30px;
-  line-height: 30px;
+  margin: 1px 0;
 }
 
 .menuItem:hover {
@@ -38,13 +44,12 @@ export default {
 }
 
 .menuItem .menuIcon {
-  float: left;
-  padding: 3px 3px 3px 0;
   height: 30px;
+  line-height: 30px;
 }
 
 .menuItem .menuText {
-  float: left;
   height: 30px;
+  line-height: 30px;
 }
 </style>

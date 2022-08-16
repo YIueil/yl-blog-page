@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import { store } from '@/store/store'
 import {
   Editor,
   rootCtx,
@@ -16,6 +17,8 @@ import {
 import { nord } from '@milkdown/theme-nord'
 import { VueEditor, useEditor } from '@milkdown/vue'
 import { gfm } from '@milkdown/preset-gfm'
+
+import { replaceAll, forceUpdate } from '@milkdown/utils' // 宏
 
 import { listener, listenerCtx } from '@milkdown/plugin-listener' // 内容监听
 
@@ -42,13 +45,18 @@ export default {
     },
     onMarkdownUpdated: {
       type: Function,
-      default: (ctx, markdown, prevMarkdown) => {
-        console.log(ctx, markdown, prevMarkdown)
+      default: (ctx, next) => {
+        store.currentPage.dataRef.title = next.slice(0, next.indexOf('\n')).replace('#', '').trim()
+        store.currentPage.dataRef.content = next
       }
     }
   },
-  setup (props, context) {
-    console.log(props, context)
+  data () {
+    return {
+      store
+    }
+  },
+  setup (props) {
     const editable = () => !props.readonly
     const editor = useEditor((root) => {
       return Editor.make()
@@ -167,7 +175,6 @@ export default {
                         actions: defaultActions(ctx, content).map(mapActions)
                       }
                 }
-
                 return null
               }
             }
@@ -180,17 +187,28 @@ export default {
   },
   methods: {
     async getMarkDownText () {
-      const editor = await Editor.make().use(gfm).create()
-
-      const getMarkdown = () => {
-        return editor.action((ctx) => {
-          const editorView = ctx.get(editorViewCtx)
-          const serializer = ctx.get(serializerCtx)
-          return serializer(editorView.state.doc)
-        })
-      }
-      getMarkdown()
+      const editor = this.editor.getInstance()
+      return editor.action((ctx) => {
+        const editorView = ctx.get(editorViewCtx)
+        const serializer = ctx.get(serializerCtx)
+        return serializer(editorView.state.doc)
+      })
+    },
+    async switchReadMode () {
+      const editable = () => !store.config.readOnly
+      const editor = this.editor.getInstance()
+      editor.config((ctx) => {
+        ctx.set(editorViewOptionsCtx, { editable })
+      })
+      editor.action(forceUpdate())
+    },
+    async replaceAllText () {
+      this.editor.getInstance().action(replaceAll(store.currentPage.content))
     }
+  },
+  mounted () {
+    this.$Event.on('onReadModeChange', this.switchReadMode)
+    this.$Event.on('onPageChange', this.replaceAllText)
   }
 }
 </script>

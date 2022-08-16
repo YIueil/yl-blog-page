@@ -7,9 +7,9 @@
       </div>
       <span class="material-icons menu">menu</span>
     </div>
-    <SiderMenuList />
-    <AntDesignTree />
-    <div class="button">
+    <SiderMenuList style="padding: 10px 0 10px 0" />
+    <AntDesignTree style="padding: 10px 0 10px 0" />
+    <div @click="newPage" class="button">
       ⚡ New page
     </div>
     <div class="resize-line">
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { store } from '@/store/store'
+import uuid from '../../utils/uuid'
 import Avatar from 'ant-design-vue/lib/avatar'
 import 'ant-design-vue/lib/avatar/style'
 
@@ -27,7 +29,24 @@ import SiderMenuList from '@/components/Menu/SiderMenuList'
 
 export default {
   name: 'BasicSider',
-  components: { AntDesignTree, Avatar, SiderMenuList }
+  components: { AntDesignTree, Avatar, SiderMenuList },
+  data () {
+    return {
+      store
+    }
+  },
+  methods: {
+    /**
+     * 新增页面
+     */
+    newPage () {
+      this.store.treeData.push({
+        key: uuid(),
+        title: 'New page',
+        content: '# New Page'
+      })
+    }
+  }
 }
 </script>
 
@@ -50,7 +69,10 @@ export default {
 }
 
 .line {
-  cursor: col-resize; height: 100%; width: 12px; margin-left: -6px;
+  cursor: col-resize;
+  height: 100%;
+  width: 12px;
+  margin-left: -6px;
 }
 
 .menu {
