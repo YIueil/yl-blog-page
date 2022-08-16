@@ -7,7 +7,7 @@
       <BreadcrumbItem>An Application</BreadcrumbItem>
     </Breadcrumb>
     <div class="buttonGroup">
-      <span class="material-icons clickable">visibility</span>
+      <span class="material-icons clickable">favorite</span>
       <span class="material-icons clickable">lock</span>
       <span class="material-icons clickable">settings</span>
     </div>
@@ -31,15 +31,27 @@ export default {
 <style scoped>
 .header {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .buttonGroup {
+  display: flex;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
   height: 64px;
+  flex-direction: row;
+  align-items: center;
 }
 
 .clickable {
   padding: 5px 5px;
   margin: 5px 5px;
+  color: #55534e;
 }
 
 .clickable:hover {

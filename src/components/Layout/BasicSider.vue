@@ -41,22 +41,33 @@ export default {
   border-top: 1px solid #e1e1e1;
   color: #767571;
   font-weight: 600;
+  user-select:none;
 }
 
 .button:hover {
   cursor: pointer;
   background: #ebebea;
 }
+.button:active {
+  background: #dddddc;
+}
 
 .wordSpace {
   display: flex;
   height: 64px;
+  padding: 2px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
 }
 .wordSpace:hover {
   cursor: pointer;
   background: #ebebea;
 }
 .userName {
+  padding: 0 10px 0 10px;
   font-weight: 600;
   font-size: 20px;
 }

@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
 .siderMenuList {
-
+  user-select: none;
 }
 
 .menuItem {
@@ -31,6 +31,10 @@ export default {
 .menuItem:hover {
   background: #ebebea;
   cursor: pointer;
+}
+
+.menuItem:active {
+  background: #dddddc;
 }
 
 .menuItem .menuIcon {
