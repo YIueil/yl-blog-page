@@ -7,6 +7,8 @@
       <BreadcrumbItem>An Application</BreadcrumbItem>
     </Breadcrumb>
     <div class="buttonGroup">
+      <span class="material-icons clickable">light_mode</span>
+      <span class="material-icons clickable">dark_mode</span>
       <span class="material-icons clickable">favorite</span>
       <span class="material-icons clickable">lock</span>
       <span class="material-icons clickable">settings</span>
