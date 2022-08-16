@@ -1,7 +1,7 @@
 <template>
   <Layout style="height: 100vh">
     <Sider>
-      <AntDesignTree />
+      <BasicSider />
     </Sider>
     <Layout style="overflow-y: auto">
       <Header>
@@ -23,10 +23,12 @@ import 'ant-design-vue/lib/layout/style'
 import AntDesignTree from '@/components/Tree/AntDesignTree'
 import MilkDownEditor from '@/components/Editor/MilkDownEditor'
 import BasicBreadcrumb from '@/components/Breadcrumb/BasicBreadcrumb'
+import BasicSider from '@/components/Layout/BasicSider'
 
 export default {
   name: 'BasicLayout',
   components: {
+    BasicSider,
     BasicBreadcrumb,
     MilkDownEditor,
     AntDesignTree,
