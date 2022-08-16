@@ -1,6 +1,7 @@
 <template>
-  <div class="">
-
+  <div class="siderMenuList">
+    <div class="menuItem">快速查找</div>
+    <div class="menuItem">导入</div>
   </div>
 </template>
 
@@ -11,5 +12,10 @@ export default {
 </script>
 
 <style scoped>
+.siderMenuList {
 
+}
+.menuItem {
+
+}
 </style>

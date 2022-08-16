@@ -3,11 +3,11 @@
     <Sider>
       <BasicSider />
     </Sider>
-    <Layout style="overflow-y: auto">
+    <Layout>
       <Header>
         <BasicBreadcrumb />
       </Header>
-      <Content>
+      <Content style="overflow-y: auto; height: calc(100vh - 64px)">
         <MilkDownEditor style="padding: 40px" />
       </Content>
     </Layout>
