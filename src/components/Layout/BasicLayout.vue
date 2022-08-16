@@ -1,5 +1,5 @@
 <template>
-  <Layout style="height: 100vh">
+  <Layout>
     <Sider>
       <BasicSider />
     </Sider>

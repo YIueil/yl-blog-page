@@ -5,7 +5,7 @@
           :tree-data="treeData"
           :show-line="true"
           show-icon
-          draggable="true"
+          :draggable="true"
           block-node
           default-expand-all>
   </a-tree>
@@ -45,7 +45,8 @@ const treeData = [{
       key: '0-0-2-1',
     }],
   }],
-}, {
+},
+  {
   title: 'parent 2',
   key: '0-1',
   children: [{
