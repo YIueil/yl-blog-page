@@ -43,7 +43,7 @@ export default {
       this.store.treeData.push({
         key: uuid(),
         title: 'New page',
-        content: '# New Page'
+        content: '# New page'
       })
     }
   }
@@ -77,6 +77,7 @@ export default {
 
 .menu {
   padding: 8px 10px;
+  user-select: none;
 }
 
 .menu:hover {
