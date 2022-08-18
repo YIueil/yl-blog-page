@@ -4,6 +4,8 @@
 </template>
 
 <script>
+
+import _ from 'loadsh'
 import { store } from '@/store/store'
 import {
   Editor,
@@ -48,12 +50,18 @@ export default {
       default: (ctx, next) => {
         store.currentPage.dataRef.title = next.slice(0, next.indexOf('\n')).replace('#', '').trim()
         store.currentPage.dataRef.content = next
+        if (!store.$onSave) {
+          store.$onSave = _.debounce(function () {
+            console.log(`save on 3000 ms`, _.cloneDeep(store.currentPage))
+          }, 3000)
+        }
+        store.$onSave()
       }
     }
   },
   data () {
     return {
-      store
+      store: store
     }
   },
   setup (props) {

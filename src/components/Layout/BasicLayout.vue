@@ -5,10 +5,10 @@
     </Sider>
     <Layout>
       <Header>
-        <BasicBreadcrumb />
+        <BasicHeader />
       </Header>
       <Content style="overflow-y: auto; height: calc(100vh - 64px)">
-        <MilkDownEditor style="padding: 40px" />
+        <BasicContent />
       </Content>
     </Layout>
   </Layout>
@@ -20,18 +20,16 @@ import Sider from 'ant-design-vue/lib/layout/Sider'
 
 import 'ant-design-vue/lib/layout/style'
 
-import AntDesignTree from '@/components/Tree/AntDesignTree'
-import MilkDownEditor from '@/components/Editor/MilkDownEditor'
-import BasicBreadcrumb from '@/components/Breadcrumb/BasicBreadcrumb'
 import BasicSider from '@/components/Layout/BasicSider'
+import BasicHeader from '@/components/Layout/BasicHeader'
+import BasicContent from '@/components/Layout/BasicContent'
 
 export default {
   name: 'BasicLayout',
   components: {
+    BasicContent,
+    BasicHeader,
     BasicSider,
-    BasicBreadcrumb,
-    MilkDownEditor,
-    AntDesignTree,
     Layout,
     Header,
     Content,

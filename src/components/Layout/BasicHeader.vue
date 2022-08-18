@@ -21,7 +21,7 @@ import Breadcrumb, { BreadcrumbItem, BreadcrumbSeparator } from 'ant-design-vue/
 import 'ant-design-vue/lib/breadcrumb/style'
 
 export default {
-  name: 'BasicBreadcrumb',
+  name: 'BasicHeader',
   components: {
     Breadcrumb,
     BreadcrumbItem,
