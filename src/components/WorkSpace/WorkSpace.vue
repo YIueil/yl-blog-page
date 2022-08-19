@@ -39,7 +39,11 @@
         <span class="material-icons menu">menu</span>
       </div>
     </Popover>
-    <Modal v-model:visible="visible" :title="title" @ok="saveSpace">
+    <Modal v-model:visible="visible" :title="title">
+      <template #footer>
+        <span class="material-icons clickable noSelect" @click="reset">close</span>
+        <span class="material-icons clickable noSelect" @click="saveSpace">check</span>
+      </template>
       <div style="display: flex;justify-content: space-around;align-items: center;">
         <Upload
             v-model:file-list="fileList"
