@@ -54,19 +54,4 @@ export default {
   flex-direction: row;
   align-items: center;
 }
-
-.clickable {
-  padding: 5px 5px;
-  margin: 5px 5px;
-  color: #55534e;
-}
-
-.clickable:hover {
-  cursor: pointer;
-  background: #efefef;
-}
-
-.clickable:active {
-  background: #dddddc;
-}
 </style>

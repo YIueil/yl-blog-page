@@ -1,0 +1,56 @@
+/*icon按钮hover和click特效*/
+.button {
+    width: 100%;
+    padding: 8px 10px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid #e1e1e1;
+    color: #767571;
+    font-weight: 600;
+    user-select: none;
+}
+.button:hover {
+    cursor: pointer;
+    background: #ebebea;
+}
+.button:active {
+    background: #dddddc;
+}
+
+/*更深的按钮hover和click特效*/
+.menu {
+    padding: 10px 10px;
+    user-select: none;
+}
+.menu:hover {
+    background: #dddddc;
+}
+.menu:active {
+    background: #bababa;
+}
+
+/*可点击的icon*/
+.clickable {
+    padding: 5px 5px;
+    margin: 5px 5px;
+    color: #55534e;
+}
+.clickable:hover {
+    cursor: pointer;
+    background: #efefef;
+}
+.clickable:active {
+    background: #dddddc;
+}
+
+/*不需要内容*/
+.noPadding {
+    padding: 0;
+}
+.noMargin {
+    margin: 0;
+}
+.noSelect {
+    user-select: none;
+}
