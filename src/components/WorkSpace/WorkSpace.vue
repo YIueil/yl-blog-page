@@ -12,10 +12,10 @@
         </div>
       </template>
       <template #content>
-        <div class="workSpace" style="width: 200px">
+        <div class="workSpace" style="width: 200px" :key="space.guid" v-for="space in spaceList">
           <div class="userBox">
-            <Avatar class="avatar" :size="32" src="https://s2.loli.net/2022/05/10/6NZgpvlQx8PBG3o.png"></Avatar>
-            <span class="userName" style="font-size: 16px">弋孓</span>
+            <Avatar class="avatar" :size="32" :src="space.iconUrl"></Avatar>
+            <span class="userName" style="font-size: 16px">{{ space.name }}</span>
           </div>
           <span class="material-icons menu noPadding">
             more_horiz
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import space from '@/apis/space'
 import { store } from '@/store/store'
 import Avatar from 'ant-design-vue/lib/avatar'
 import Popover from 'ant-design-vue/lib/popover'
@@ -87,6 +88,7 @@ export default {
       store,
       visible: false,
       title: '新增工作空间',
+      spaceList: [],
       space: {
         iconUrl: '',
         name: ''
@@ -96,12 +98,20 @@ export default {
     }
   },
   methods: {
+    init () {
+      this.getSpaceList()
+    },
+    async getSpaceList () {
+      this.spaceList = await space.listSpace()
+    },
     showEditSpace (title) {
       this.title = title
       this.visible = true
     },
-    saveSpace () {
-      console.log(this.space)
+    async saveSpace () {
+      await space.addSpace(this.space)
+      this.$message.success('添加成功')
+      await this.getSpaceList()
       this.reset()
     },
     reset () {
@@ -146,6 +156,9 @@ export default {
         this.$message.error('上传错误')
       }
     }
+  },
+  mounted () {
+    this.init()
   }
 }
 </script>
