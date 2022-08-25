@@ -5,6 +5,8 @@
 
 <script>
 
+import page from '@/apis/page'
+
 import _ from 'loadsh'
 import { store } from '@/store/store'
 import {
@@ -52,7 +54,14 @@ export default {
         store.currentPage.dataRef.content = next
         if (!store.$onSave) {
           store.$onSave = _.debounce(function () {
-            console.log(`save on 3000 ms`, _.cloneDeep(store.currentPage))
+            const currentPageClone = _.cloneDeep(store.currentPage.dataRef)
+            if (currentPageClone.id) {
+              page.updatePage({
+                id: currentPageClone.id
+              }, currentPageClone)
+            } else {
+              page.addPage(currentPageClone)
+            }
           }, 3000)
         }
         store.$onSave()

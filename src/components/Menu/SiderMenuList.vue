@@ -8,7 +8,7 @@
       <span class="menuIcon material-icons">upload</span>
       <span class="menuText">导入</span>
     </div>
-    <div class="menuItem">
+    <div class="menuItem" @click="handleDelete">
       <span class="menuIcon material-icons">delete</span>
       <span class="menuText">删除</span>
     </div>
@@ -16,8 +16,31 @@
 </template>
 
 <script>
+import { store } from '@/store/store'
+import page from '@/apis/page'
+
 export default {
-  name: 'SiderMenuList'
+  name: 'SiderMenuList',
+  methods: {
+    handleDelete () {
+      const that = this
+      this.$confirm({
+        title: '确定删除?',
+        icon: null,
+        async onOk () {
+          const id = store.currentPage.dataRef.id
+          store.currentPage = {}
+          await page.deletePage({
+            id: id
+          })
+          that.$Event.emit('onRefreshPage')
+        },
+        onCancel () {
+          console.log('Cancel')
+        }
+      })
+    }
+  }
 }
 </script>
 

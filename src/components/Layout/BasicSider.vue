@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import page from '@/apis/page'
 import { store } from '@/store/store'
 import uuid from '../../utils/uuid'
 
@@ -27,21 +28,36 @@ export default {
     AntDesignTree,
     SiderMenuList
   },
+  mounted () {
+    this.init()
+    this.$Event.on('onRefreshPage', this.getPageList)
+  },
   data () {
     return {
       store
     }
   },
   methods: {
+    init () {
+      this.getPageList()
+    },
+    async getPageList () {
+      this.store.treeData = await page.listPageTree({
+        spaceId: 1
+      })
+    },
     /**
      * 新增页面
      */
-    newPage () {
-      this.store.treeData.push({
-        key: uuid(),
+    async newPage () {
+      const parentId = store.currentPage.dataRef.id || 0
+      await page.addPage({
+        guid: uuid(),
+        parentId: parentId,
         title: 'New page',
         content: '# New page'
       })
+      this.$Event.emit('onRefreshPage')
     }
   }
 }

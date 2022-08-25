@@ -5,6 +5,7 @@
           @select="onSelected"
           :tree-data="treeData"
           :show-line="true"
+          :fieldNames="fieldNames"
           show-icon
           :draggable="true"
           block-node
@@ -26,8 +27,12 @@ export default defineComponent({
   data () {
     return {
       store,
-      treeData: store.treeData,
-      selectedKeys: []
+      selectedKeys: [],
+      fieldNames: {
+        children: 'children',
+        title: 'title',
+        key: 'guid'
+      }
     }
   },
   methods: {
@@ -60,11 +65,23 @@ export default defineComponent({
      * @param e
      */
     onSelected (selectKeys, e) {
-      if (selectKeys.length === 1) {
+      // 切换节点保存当前节点
+      this.$Event.emit('onSavePage')
+      if (selectKeys.length === 0) {
+        document.title = '未选择'
+        this.store.currentPage = {
+          dataRef: {}
+        }
+      } else if (selectKeys.length === 1) {
         document.title = e.node.title
         this.store.currentPage = e.node
         this.$Event.emit('onPageChange')
       }
+    }
+  },
+  computed: {
+    treeData () {
+      return store.treeData
     }
   }
 })
