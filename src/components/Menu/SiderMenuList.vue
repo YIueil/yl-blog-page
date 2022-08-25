@@ -24,12 +24,18 @@ export default {
   methods: {
     handleDelete () {
       const that = this
+      const id = store.currentPage.dataRef.id
+      if (!id) {
+        this.$message.warn('请选择需要删除的节点')
+        return
+      }
       this.$confirm({
         title: '确定删除?',
         icon: null,
         async onOk () {
-          const id = store.currentPage.dataRef.id
-          store.currentPage = {}
+          store.currentPage = {
+            dataRef: {}
+          }
           await page.deletePage({
             id: id
           })
