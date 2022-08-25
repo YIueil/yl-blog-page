@@ -65,8 +65,12 @@ export default defineComponent({
      * @param e
      */
     onSelected (selectKeys, e) {
-      // 切换节点保存当前节点
-      this.$Event.emit('onSavePage')
+      // 切换节点前, 判断是否内容已有变动, 如有变动先保存当前节点
+      if (store.currentPage.id) { // 有已选择项
+        if (store.currentPage.content !== store.currentPage.dataRef.content) {
+          this.$Event.emit('onSavePage')
+        }
+      }
       if (selectKeys.length === 0) {
         document.title = '未选择'
         this.store.currentPage = {
