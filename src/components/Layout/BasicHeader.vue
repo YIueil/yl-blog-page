@@ -1,10 +1,9 @@
 <template>
   <div class="header">
     <Breadcrumb>
-      <BreadcrumbItem>Home</BreadcrumbItem>
-      <BreadcrumbItem><a href="">Application Center</a></BreadcrumbItem>
-      <BreadcrumbItem><a href="">Application List</a></BreadcrumbItem>
-      <BreadcrumbItem>An Application</BreadcrumbItem>
+      <BreadcrumbItem v-for="item in breadcrumbList" :key="item.id">
+        {{ item.name }}
+      </BreadcrumbItem>
     </Breadcrumb>
     <div class="buttonGroup">
       <span class="material-icons clickable">light_mode</span>
@@ -19,6 +18,7 @@
 <script>
 import Breadcrumb, { BreadcrumbItem, BreadcrumbSeparator } from 'ant-design-vue/lib/breadcrumb'
 import 'ant-design-vue/lib/breadcrumb/style'
+import { store } from '@/store/store'
 
 export default {
   name: 'BasicHeader',
@@ -30,6 +30,14 @@ export default {
   methods: {
     readModeChange () {
       this.$Event.emit('onReadModeChange')
+    }
+  },
+  computed: {
+    breadcrumbList () {
+      if (!store.currentPage.dataRef.id) {
+        return null
+      }
+      return null
     }
   }
 }

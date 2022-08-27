@@ -6,9 +6,6 @@
     <div @click="newPage" class="button">
       ⚡ New page
     </div>
-    <div class="resize-line">
-      <div class="line"></div>
-    </div>
   </div>
 </template>
 
@@ -37,6 +34,7 @@ export default {
       store
     }
   },
+  watch: {},
   methods: {
     init () {
       this.getPageList()
@@ -68,23 +66,5 @@ export default {
   height: 100vh;
   min-height: 600px;
   border-right: 2px solid #e1e1e1;
-}
-
-.resize-line {
-  position: absolute;
-  right: 0;
-  width: 0;
-  flex-grow: 0;
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  pointer-events: auto;
-}
-
-.line {
-  cursor: col-resize;
-  height: 100%;
-  width: 12px;
-  margin-left: -6px;
 }
 </style>
