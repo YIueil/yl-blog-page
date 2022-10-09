@@ -72,12 +72,10 @@ import 'ant-design-vue/lib/avatar/style'
 import 'ant-design-vue/lib/popover/style'
 import 'ant-design-vue/lib/upload/style'
 import 'ant-design-vue/lib/modal/style'
-import TextInput from '@/components/Base/TextInput'
 
 export default {
   name: 'WorkSpace',
   components: {
-    TextInput,
     Avatar,
     Popover,
     Upload,
