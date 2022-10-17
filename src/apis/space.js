@@ -14,8 +14,11 @@ export default {
             data
         })
     },
-    deleteSpace (params) {
-        console.log(params)
+    deleteSpace (id) {
+        return request({
+            url: `/space/${id}`,
+            method: 'delete'
+        })
     },
     updateSpace (params) {
         console.log(params)

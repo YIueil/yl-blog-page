@@ -23,13 +23,13 @@
             </span>
             <template #overlay>
               <Menu>
-                <MenuItem>
+                <MenuItem @click="editSpace(space)">
                   <div class="flex-row-center">
                     <span class="material-icons">edit</span>
                     <span>编辑</span>
                   </div>
                 </MenuItem>
-                <MenuItem class="flex-row-center">
+                <MenuItem @click="deleteSpaceConfirm(space.id)" class="flex-row-center">
                   <div class="flex-row-center">
                     <span class="material-icons">delete</span>
                     <span>删除</span>
@@ -76,7 +76,6 @@
       </div>
     </Modal>
   </div>
-
 </template>
 
 <script>
@@ -134,9 +133,24 @@ export default {
     },
     async saveSpace () {
       await space.addSpace(this.space)
-      this.$message.success('添加成功')
+      this.$message.success('操作成功')
       await this.getSpaceList()
       this.reset()
+    },
+    editSpace (curSpace) {
+      this.space = curSpace
+      this.showEditSpace('编辑工作空间')
+    },
+    deleteSpaceConfirm (id) {
+      this.$confirm({
+        title: '提示',
+        content: '确定删除?',
+        async onOk() {
+          await space.deleteSpace(id)
+          this.$message.success('操作成功')
+          this.getSpaceList()
+        }
+      })
     },
     reset () {
       this.fileList = []
