@@ -17,9 +17,27 @@
             <Avatar class="avatar" :size="32" :src="space.iconUrl"></Avatar>
             <span class="userName" style="font-size: 16px">{{ space.name }}</span>
           </div>
-          <span class="material-icons menu noPadding">
-            more_horiz
-          </span>
+          <Dropdown :trigger="['click']">
+            <span class="ant-dropdown-link material-icons menu noPadding">
+              more_horiz
+            </span>
+            <template #overlay>
+              <Menu>
+                <MenuItem>
+                  <div class="flex-row-center">
+                    <span class="material-icons">edit</span>
+                    <span>编辑</span>
+                  </div>
+                </MenuItem>
+                <MenuItem class="flex-row-center">
+                  <div class="flex-row-center">
+                    <span class="material-icons">delete</span>
+                    <span>删除</span>
+                  </div>
+                </MenuItem>
+              </Menu>
+            </template>
+          </Dropdown>
         </div>
       </template>
       <div class="workSpace">
@@ -68,6 +86,11 @@ import Avatar from 'ant-design-vue/lib/avatar'
 import Popover from 'ant-design-vue/lib/popover'
 import Upload from 'ant-design-vue/lib/upload'
 import { Modal } from 'ant-design-vue'
+import Dropdown from 'ant-design-vue/lib/dropdown'
+import 'ant-design-vue/lib/dropdown/style'
+import Menu, { MenuItem } from 'ant-design-vue/lib/menu'
+import 'ant-design-vue/lib/menu/style'
+
 import 'ant-design-vue/lib/avatar/style'
 import 'ant-design-vue/lib/popover/style'
 import 'ant-design-vue/lib/upload/style'
@@ -79,7 +102,10 @@ export default {
     Avatar,
     Popover,
     Upload,
-    Modal
+    Modal,
+    Dropdown,
+    Menu,
+    MenuItem
   },
   data () {
     return {

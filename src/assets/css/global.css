@@ -44,6 +44,13 @@
     background: #dddddc;
 }
 
+/*弹性盒子预设属性*/
+.flex-row-center { /*水平排列 元素垂直居中*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 /*不需要内容*/
 .noPadding {
     padding: 0;
